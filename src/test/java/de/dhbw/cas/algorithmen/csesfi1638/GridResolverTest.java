@@ -1,4 +1,4 @@
-package de.dhbw.cas.algorithmen;
+package de.dhbw.cas.algorithmen.csesfi1638;
 
 import static org.junit.Assert.assertEquals;
 
