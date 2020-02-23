@@ -13,6 +13,7 @@ public class StringPoppingTest {
 		assertEquals(Arrays.asList(1,1,1), StringPopping.popStrings(3,Arrays.asList("aa", "aabbaa", "bbb")));
 		assertEquals(Arrays.asList(1,1,1), StringPopping.popStrings(3,Arrays.asList("aabaab", "babbaab", "abba")));
 		assertEquals(Arrays.asList(1), StringPopping.popStrings(1, Arrays.asList("aabbbba")));
+		assertEquals(Arrays.asList(1), StringPopping.popStrings(1, Arrays.asList("aabaabaabaabaabaab")));
 	}
 	
 	@Test

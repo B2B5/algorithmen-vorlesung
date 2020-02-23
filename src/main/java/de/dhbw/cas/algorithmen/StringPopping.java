@@ -64,16 +64,23 @@ public class StringPopping {
 					// kann ich poppen?
 					
 					if(isMulti) {
-						boolean canPop = isMulti;
-						boolean currentIndexIsLastChar = i==workString.length();
-						if(currentIndexIsLastChar) {
-							canPop = true;
+						boolean canPop = false;
+						//wenn nur ein letztes Einzelnes kommt koennen wir poppen. 
+						// da dann ja die Abbruchbedingung oben gilt.
+						//ist aber nicht effizient
+						int beginIndexOtherChar = -1;
+						for(int j=i+1; j<workString.length(); j++) {
+							if(workString.charAt(j) != currentChar && beginIndexOtherChar != -1 && j-beginIndexOtherChar == 1) {
+								canPop = true;
+							} else {
+								beginIndexOtherChar = j;								
+							}
 						}
-						else if(workString.length() -i > 1){
-							canPop = workString.charAt(i +1 ) == currentChar;
+						if(!canPop) {
+							canPop = beginIndexOtherChar == workString.length() -1 || i==workString.length() -1
+							|| (i+1 < workString.length() && workString.charAt(i+1) == currentChar);
 						}
-						//pop
-						//pruefen, ob danach ein einzelnes kommt
+						
 						if(canPop) {
 							workString = 
 									workString.substring(0, prevCharIndex) 
@@ -89,6 +96,8 @@ public class StringPopping {
 				}
 			}
 			if(i == workString.length() && !didPop) {
+				// emuliert das Popping am Ende, weil kein unterschiedlicher Charakter mehr gefunden wurde,
+				// z.B. bei 'aa'
 				if(isMulti) {
 					return 1;
 				}
