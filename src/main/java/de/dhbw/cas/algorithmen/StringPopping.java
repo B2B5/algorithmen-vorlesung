@@ -54,43 +54,44 @@ class StringPopping{
 			
 			char prevChar=workString.charAt(0);
 			int prevCharIndex =0;
-			boolean isMulti = false;
+			boolean isMultiGroup = false;
 			boolean didPop = false;
 			
 			for(i=1;i<workString.length(); i++) {
 				char currentChar = workString.charAt(i);
 				if(prevChar == currentChar) {
-					isMulti = true;
+					isMultiGroup = true;
 				}
-				else if(isMulti){
+				else if(isMultiGroup){
 					boolean canPop= false;
 					//check if we can pop
-					if(i==workString.length()-1) {
+					boolean isIndexOfCurrentCharTheLastChar = i==workString.length()-1;
+					if(isIndexOfCurrentCharTheLastChar) {
 						canPop=true;
 					}
-//					else if(i+1 < workString.length() && workString.charAt(i+1) == currentChar) {
-//						
-//					}
 					else {
-						//gibt an, ob das 
-						boolean isNextOfPopCharMulti = false;
-						// gibt an ob mind. 1 weiteres vom currentChar abweichendes Zeichen gefunden wurde, dann pop
-						boolean foundNext = false; 
+						// die popCharGruppe ist das vom currentChar abweichende Gruppe.
+						// das currentChar dient zum Bestimmen, wann gepoppt werden muss.
 						
-						int indexOfFirstNext = -1;
+						boolean isGroupOfPopCharAfterCurrentPopCharGroupMulti = false;
+						// gibt an ob mind. 1 weiteres vom currentChar abweichendes Zeichen gefunden wurde
+						boolean foundNextGroupOfPopChar = false; 
+						
+						int indexOfGroupOfPopCharAfterCurrentPopChar = -1;
 						for(int j= i+1; j< workString.length(); j++) {
 							if(workString.charAt(j) != currentChar) {
-								foundNext = true;
-								if(indexOfFirstNext == -1) {
-									indexOfFirstNext = j;
+								foundNextGroupOfPopChar = true;
+								if(indexOfGroupOfPopCharAfterCurrentPopChar == -1) {
+									indexOfGroupOfPopCharAfterCurrentPopChar = j;
 								}
-								else if(j-indexOfFirstNext == 1) {
-									isNextOfPopCharMulti = true;
+								else if(j-indexOfGroupOfPopCharAfterCurrentPopChar == 1) {
+									isGroupOfPopCharAfterCurrentPopCharGroupMulti = true;
 									break; // frueher abbrechen, die ganze schleife muss nicht weiter durchlaufen werden.
 								}
 							}
 						}
-						canPop = isNextOfPopCharMulti || !foundNext;
+						
+						canPop = isGroupOfPopCharAfterCurrentPopCharGroupMulti || !foundNextGroupOfPopChar;
 					}
 					if(canPop) {
 						//pop
@@ -110,7 +111,7 @@ class StringPopping{
 			if(i == workString.length() && !didPop) {
 				// emuliert das Popping am Ende, weil kein unterschiedlicher Charakter mehr gefunden wurde,
 				// z.B. bei 'aa'
-				if(isMulti) {
+				if(isMultiGroup) {
 					return 1;
 				}
 				break;
