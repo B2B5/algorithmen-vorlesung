@@ -71,7 +71,8 @@ class StringPopping{
 					}
 					else {
 						// die popCharGruppe ist das vom currentChar abweichende Gruppe.
-						// das currentChar dient zum Bestimmen, wann gepoppt werden muss.
+						// das currentChar dient zum Bestimmen, wann geprueft werden muss, ob gepoppt wird.
+						// der Kommentar oben hört sich komisch an.
 						
 						boolean isGroupOfPopCharAfterCurrentPopCharGroupMulti = false;
 						// gibt an ob mind. 1 weiteres vom currentChar abweichendes Zeichen gefunden wurde
