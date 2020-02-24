@@ -1,7 +1,16 @@
 #!/usr/bin/python3
 
+# 1 -> 1
+# 2 -> 2
+# 3 -> 6
+# 4 -> 20
+# 5 -> 70
+# 6 -> 252
+# 10 -> 48620
 n = 4
 grid = ["" for i in range(n)]
+# for i in range(n):
+#     grid[i] = "." * n
 
 grid[0] = "...."
 grid[1] = ".*.."
@@ -18,7 +27,7 @@ for i in range(n):
     f.add((n, i))
 
 def calc_paths(pos):
-    print(pos, f)
+    # print(pos, f)
     if ((n-1, n-1) == pos) and not ('*' == grid[pos[0]][pos[1]]):
         return 1
     if (n == pos[0] and n != pos[1]) \
